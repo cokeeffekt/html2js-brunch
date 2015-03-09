@@ -19,8 +19,6 @@ module.exports = function() {
 
             if (options.target === 'js') {
                 return callback(null, compileTemplate(moduleName, content, options.quoteChar, options.indentString, options.useStrict, options.htmlmin));
-            } else if (options.target === 'coffee') {
-                return callback(null, compileCoffeeTemplate(moduleName, content, options.quoteChar, options.indentString, options.htmlmin));
             } else {
                 return callback('Unknown target "' + options.target + '" specified');
             }
@@ -37,7 +35,7 @@ module.exports = function() {
         for (var i = 0; i < joinToKeys.length; i++) {
             var path = this.publicPath + pathUtils.sep + joinToKeys[i];
             var targetModule = pathUtils.basename(path, '.js');
-            bundle = "angular.module('" + targetModule + "', [" + this.moduleNames.join(', ') + "])";
+            bundle = "templates = {}";
             if (options.target === 'js') {
                 bundle += ';';
             }
@@ -101,7 +99,7 @@ module.exports = function() {
             for (var i in htmlmin) {
                 optionArray.push([i, htmlmin[i]]);
             }
-            
+
             content = minify(content, optionArray);
         }
 
@@ -115,27 +113,33 @@ module.exports = function() {
         var doubleIndent = indentString + indentString;
         var strict = (useStrict) ? indentString + quoteChar + 'use strict' + quoteChar + ';\n' : '';
 
-        var module = 'angular.module(' + quoteChar + moduleName +
-            quoteChar + ', []).run([' + quoteChar + '$templateCache' + quoteChar + ', function($templateCache) ' +
-            '{\n' + strict + indentString + '$templateCache.put(' + quoteChar + moduleName + quoteChar + ',\n' + doubleIndent + quoteChar + contentModified +
-            quoteChar + ');\n}]);\n';
+        // var module = 'angular.module(' + quoteChar + moduleName +
+        //     quoteChar + ', []).run([' + quoteChar + '$templateCache' + quoteChar + ', function($templateCache) ' +
+        //     '{\n' + strict + indentString + '$templateCache.put(' + quoteChar + moduleName + quoteChar + ',\n' + doubleIndent + quoteChar + contentModified +
+        //     quoteChar + ');\n}]);\n';
+
+        // var module = 'angular.module(' + quoteChar + moduleName +
+        //     quoteChar + ', []).run([' + quoteChar + '$templateCache' + quoteChar + ', function($templateCache) ' +
+        //     '{\n' + strict + indentString + '$templateCache.put(' + quoteChar + moduleName + quoteChar + ',\n' + doubleIndent + quoteChar + contentModified +
+        //     quoteChar + ');\n}]);\n';
+        var module = "module.exports = " + quoteChar + contentModified + quoteChar+';\n\n';
 
         return module;
     }
 
     // compile a template to an angular module
 
-    function compileCoffeeTemplate(moduleName, content, quoteChar, indentString, htmlmin) {
-        var contentModified = getContent(content, quoteChar, indentString, htmlmin);
-        var doubleIndent = indentString + indentString;
-
-        var module = 'angular.module(' + quoteChar + moduleName +
-            quoteChar + ', []).run([' + quoteChar + '$templateCache' + quoteChar + ', ($templateCache) ->\n' +
-            indentString + '$templateCache.put(' + quoteChar + moduleName + quoteChar + ',\n' + doubleIndent + quoteChar + contentModified +
-            quoteChar + ')\n])\n';
-
-        return module;
-    }
+    // function compileCoffeeTemplate(moduleName, content, quoteChar, indentString, htmlmin) {
+    //     var contentModified = getContent(content, quoteChar, indentString, htmlmin);
+    //     var doubleIndent = indentString + indentString;
+    //
+    //     var module = 'angular.module(' + quoteChar + moduleName +
+    //         quoteChar + ', []).run([' + quoteChar + '$templateCache' + quoteChar + ', ($templateCache) ->\n' +
+    //         indentString + '$templateCache.put(' + quoteChar + moduleName + quoteChar + ',\n' + doubleIndent + quoteChar + contentModified +
+    //         quoteChar + ')\n])\n';
+    //
+    //     return module;
+    // }
 
     return Html2Js;
 }();
