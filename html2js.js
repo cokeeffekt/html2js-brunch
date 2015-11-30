@@ -41,6 +41,10 @@ module.exports = function () {
 
       bundle += '\n\n';
 
+      var fileContent = fs.readFileSync(path, {
+        encoding: 'utf-8'
+      });
+
       fs.writeFile(path, bundle.concat(fileContent), function (err) {
         if (err) throw err;
       });
