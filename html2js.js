@@ -27,6 +27,7 @@ module.exports = function () {
   };
 
   Html2Js.prototype.onCompile = function (generatedFiles) {
+    return false;
     var bundle = '';
     var options = this.options;
     var joinToKeys = Object.keys(this.joinTo);
