@@ -29,6 +29,6 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "html-minifier": "~1.0.0"
+    "html-minifier": "1.4.0"
   }
 }
