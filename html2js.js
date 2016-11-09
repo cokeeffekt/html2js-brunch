@@ -60,20 +60,15 @@ module.exports = function() {
   }
 
   function getContent(content, htmlmin) {
-    if (Object.keys(htmlmin).length) {
-      var optionArray = [];
-      for (var i in htmlmin) {
-        optionArray.push([i, htmlmin[i]]);
-      }
-      content = minify(content, optionArray);
-    }
+    console.log('Before', Buffer.byteLength(content, 'utf8'));
+    content = minify(content, htmlmin || {});
     var escp = JSON.stringify(content).replace(/(^\"|\"$)/igm, '').replace(/\\n\s*/igm, '\\n ');
     return escp;
   }
 
   function compileTemplate(moduleName, content, htmlmin) {
     var contentModified = getContent(content, htmlmin);
-    var module = '  module.exports = "' + contentModified + '";';
+    var module = '  module.exports = `' + contentModified + '`;';
     return module;
   }
 
