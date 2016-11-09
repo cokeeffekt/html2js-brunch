@@ -59,16 +59,9 @@ module.exports = function() {
     return p;
   }
 
-  function getContent(content, htmlmin) {
-    console.log('Before', Buffer.byteLength(content, 'utf8'));
-    content = minify(content, htmlmin || {});
-    var escp = JSON.stringify(content).replace(/(^\"|\"$)/igm, '').replace(/\\n\s*/igm, '\\n ');
-    return escp;
-  }
-
   function compileTemplate(moduleName, content, htmlmin) {
-    var contentModified = getContent(content, htmlmin);
-    var module = '  module.exports = `' + contentModified + '`;';
+    var contentModified = minify(content, htmlmin);
+    var module = 'module.exports = `' + contentModified + '`;';
     return module;
   }
 
