@@ -1,32 +1,26 @@
 {
   "name": "html2js-brunch",
-  "version": "0.0.6",
-  "description": "Mimics the behavior of grunt-html2js",
-  "homepage": "https://github.com/aberman/html2js-brunch",
+  "version": "0.0.7",
+  "description": "Makes consolidated templates",
+  "homepage": "https://github.com/cokeeffekt/html2js-brunch",
   "main": "./html2js.js",
-  "devDependencies": {
-    "chai": "~1.9.0",
-    "mocha": "~1.17.1"
-  },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "start": "echo notthingtosee"
   },
-  "author": "Andrew Berman",
+  "author": "Patrik Hartwig",
   "repository": {
     "type": "git",
     "url": "https://github.com/aberman/html2js-brunch.git"
   },
   "bugs": {
-    "url": "https://github.com/aberman/html2js-brunch/issues"
+    "url": "https://github.com/cokeeffekt/html2js-brunch"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/aberman/html2js-brunch/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/cokeeffekt/html2js-brunch"
+  }],
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 5.5"
   },
   "dependencies": {
     "html-minifier": "1.4.0"
