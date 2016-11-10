@@ -61,6 +61,7 @@ module.exports = function() {
 
   function compileTemplate(moduleName, content, htmlmin) {
     var contentModified = minify(content, htmlmin);
+    contentModified = contentModified.replace(/\\/g, "\\\\");
     var module = 'module.exports = `' + contentModified + '`;';
     return module;
   }
