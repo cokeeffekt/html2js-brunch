@@ -15,14 +15,17 @@
   "bugs": {
     "url": "https://github.com/cokeeffekt/html2js-brunch"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/cokeeffekt/html2js-brunch"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/cokeeffekt/html2js-brunch"
+    }
+  ],
   "engines": {
     "node": ">= 5.5"
   },
   "dependencies": {
+    "es6-templates": "^0.2.3",
     "html-minifier": "1.4.0"
   }
 }
